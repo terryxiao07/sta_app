@@ -55,6 +55,8 @@ class Styles {
   static const BorderRadius mainBorderRadius =
       BorderRadius.all(Radius.circular(mainBorderRadiusValue));
 
+  static final BorderRadius primaryBorderRadius = BorderRadius.circular(20);
+
   /// Horizontal padding value.
   static const double mainHorizontalPadding = 24.0;
 
