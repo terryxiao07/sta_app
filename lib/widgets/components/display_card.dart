@@ -1,32 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:app/widgets/reusable/info_box.dart';
 import 'package:app/theme/styles.dart';
 
 class DisplayCard extends StatelessWidget {
-  final String title;
-  final String name;
-  final String message;
-  final List<Map<String, String>> infoBoxesData; // List of info box data
+  final String title; // Title of Card
 
   const DisplayCard({
-    super.key,
-    required this.title,
-    required this.name,
-    required this.message,
-    required this.infoBoxesData, // Accept list of info box data
+    super.key, // Accept list of info box data
+    required this.title
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
-    // Create a list of InfoBox widgets from the infoBoxesData
-    List<Widget> infoBoxes = infoBoxesData.map((infoBoxData) {
-      return InfoBox(
-        name: infoBoxData['name'] ?? '',
-        message: infoBoxData['message'] ?? '',
-      );
-    }).toList();
 
     return Column(
       children: [
@@ -51,8 +36,6 @@ class DisplayCard extends StatelessWidget {
                     title,
                     style: theme.textTheme.displayLarge?.copyWith(color: Styles.primary),
                   ),
-                  // Display the list of InfoBox widgets
-                  ...infoBoxes,
                 ],
               ),
             ),
