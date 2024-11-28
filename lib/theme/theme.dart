@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:theme/styles.dart';
+import 'package:app/theme/styles.dart';
 
 ThemeData appThemeData = ThemeData(
-  appBarTheme: const AppBarTheme(
+  useMaterial3: true, // Enables Material 3 design
+  appBarTheme: AppBarTheme(
     color: Styles.primary,
     elevation: 0.0,
     iconTheme: IconThemeData(color: Styles.secondary),
-    toolbarTextStyle: TextStyle(
+    titleTextStyle: TextStyle(
       fontFamily: Styles.fontFamilyNormal,
       fontSize: 20.0,
       fontWeight: FontWeight.w500,
@@ -15,21 +16,24 @@ ThemeData appThemeData = ThemeData(
     ),
   ),
   brightness: Brightness.light,
-  colorScheme: ColorScheme.fromSwatch()
-      .copyWith(primary: Styles.primary, secondary: Styles.secondary),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    primary: Styles.primary,
+    secondary: Styles.secondary,
+    surface: Styles.white,
+    error: Styles.error,
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Styles.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Styles.secondary),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              const RoundedRectangleBorder(
-                  borderRadius: Styles.mainBorderRadius,
-                  side: BorderSide(color: Styles.secondary))))),
-  fontFamily: Styles.fontFamilyNormal,
-  hintColor: Styles.grey,
-  iconTheme: const IconThemeData(color: Styles.primary),
-  inputDecorationTheme: const InputDecorationTheme(
-    contentPadding: EdgeInsets.symmetric(
+    style: ElevatedButton.styleFrom(
+      foregroundColor: Styles.white,
+      backgroundColor: Styles.secondary,
+      shape: RoundedRectangleBorder(
+        borderRadius: Styles.mainBorderRadius,
+        side: BorderSide(color: Styles.secondary),
+      ),
+    ),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    contentPadding: const EdgeInsets.symmetric(
       horizontal: Styles.mainHorizontalPadding,
       vertical: Styles.mainVerticalPadding,
     ),
@@ -60,12 +64,13 @@ ThemeData appThemeData = ThemeData(
       color: Styles.grey,
     ),
   ),
-  primaryColor: createMaterialColor(Styles.primary),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
-      primary: Styles.secondary,
+      foregroundColor: Styles.secondary,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      textStyle: const TextStyle(fontFamily: Styles.fontFamilyNormal),
+      textStyle: TextStyle(
+        fontFamily: Styles.fontFamilyNormal,
+      ),
     ),
   ),
   textSelectionTheme: TextSelectionThemeData(
@@ -73,81 +78,81 @@ ThemeData appThemeData = ThemeData(
     selectionHandleColor: Styles.secondary,
     selectionColor: Styles.secondary.withOpacity(0.5),
   ),
-  textTheme: const TextTheme(
-    headline1: TextStyle(
+  textTheme: TextTheme(
+    displayLarge: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 96.0,
         fontWeight: FontWeight.w300,
         color: Styles.primary,
         letterSpacing: -1.5),
-    headline2: TextStyle(
+    displayMedium: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 60.0,
         fontWeight: FontWeight.w300,
         color: Styles.primary,
         letterSpacing: -0.5),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 48.0,
         fontWeight: FontWeight.w400,
         color: Styles.primary,
         letterSpacing: 0.0),
-    headline4: TextStyle(
+    headlineLarge: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 34.0,
         fontWeight: FontWeight.w400,
         color: Styles.primary,
         letterSpacing: 0.25),
-    headline5: TextStyle(
+    headlineMedium: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 24.0,
         fontWeight: FontWeight.w600,
         color: Styles.primary,
         letterSpacing: 0.0),
-    headline6: TextStyle(
+    headlineSmall: TextStyle(
         fontFamily: Styles.fontFamilyTitles,
         fontSize: 18.0,
         fontWeight: FontWeight.bold,
         color: Styles.primary,
         letterSpacing: 0.15),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 16.0,
         fontWeight: FontWeight.w500,
         color: Styles.white,
         letterSpacing: 0.15),
-    subtitle2: TextStyle(
+    titleSmall: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 14.0,
         fontWeight: FontWeight.bold,
         color: Styles.primary,
         letterSpacing: 0.1),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 16.0,
         fontWeight: FontWeight.w400,
         color: Styles.primary,
         letterSpacing: 0.5),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       fontFamily: Styles.fontFamilyNormal,
       fontSize: 14.0,
       fontWeight: FontWeight.w400,
       color: Styles.primary,
       letterSpacing: 0.25,
     ),
-    button: TextStyle(
+    labelLarge: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
         color: Styles.primary,
         letterSpacing: 1.25),
-    caption: TextStyle(
+    bodySmall: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 12.0,
         fontWeight: FontWeight.w400,
         color: Styles.primary,
         letterSpacing: 0.4),
-    overline: TextStyle(
+    labelSmall: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 10.0,
         fontWeight: FontWeight.w400,
@@ -156,8 +161,7 @@ ThemeData appThemeData = ThemeData(
   ),
 );
 
-// From: https://medium.com/py-bits/turn-any-color-to-material-color-for-flutter-d8e8e037a837
-/// Converts a [color] to a material color.
+// Converts a [color] to a MaterialColor.
 MaterialColor createMaterialColor(Color color) {
   int r = color.red, g = color.green, b = color.blue;
   return MaterialColor(
