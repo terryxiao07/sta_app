@@ -8,8 +8,8 @@ class Announcements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DisplayCard(
-      title: "Announcementsssss",
-      description: "Subheading area, that can be empty",
+      title: "Announcements Board",
+      description: "In case subheadings are need, otherwise leave empty",
       child: Column(
         children: [
           InfoBox(

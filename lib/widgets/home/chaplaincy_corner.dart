@@ -12,18 +12,13 @@ class ChaplaincyCorner extends StatelessWidget {
       child: Column(
         children: [
           InfoBox(
-            name: "Announcement 1",
-            message: "This is the subheading for annoucement 1. I am adding text for no reason.",
+            name: "Verse of The Day",
+            message: "So we fix our eyes not on what is seen, but on what is unseen, since what is seen is temporary, but what is unseen is eternal.",
           ),
           SizedBox(height: 16), // Spacing between InfoBoxes
           InfoBox(
-            name: "Announcement 2",
-            message: "This is the subheading for annoucement 2. I am adding text for no reason.",
-          ),
-          SizedBox(height: 16),
-          InfoBox(
-            name: "Announcement 3",
-            message: "This is the subheading for annoucement 3. I am adding text for no reason.",
+            name: "Additional",
+            message: "Subheading",
           ),
         ],
       ),

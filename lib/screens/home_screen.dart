@@ -4,6 +4,7 @@ import 'package:app/theme/styles.dart'; // Import the Styles file.
 import 'package:app/widgets/components/title_card.dart';
 import 'package:app/widgets/home/announcements.dart';
 import 'package:app/widgets/home/chaplaincy_corner.dart';
+import 'package:app/widgets/home/featured_cafe_items.dart';
 import 'package:app/widgets/components/display_card.dart';
 import 'package:app/widgets/components/info_box.dart';
 
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               const TitleCard(title: "Title"),
               DisplayCard(
                 title: "Test Card - Welcome to the App!",
-                description: "this is a reusable card with a button",
+                description: "this is a reusable card with a button...",
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Styles.secondary,
@@ -45,14 +46,15 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const Announcements(),
+              const FeaturedCafeItems(),
               const ChaplaincyCorner(),
               const DisplayCard(
-                title: "Info Inside Card",
+                title: "DisplayCard",
                 description:
-                    "This card contains an InfoBox component as its content.",
+                    "This is a Display, which contains a description (which is the text that you are reading) and a InfoBox component as its content!!!",
                 child: InfoBox(
                   name: "Infobox",
-                  message: "This an infobox in case you were wondering",
+                  message: "This an infobox in case you were wondering...",
                 ),
               ),
             ],
