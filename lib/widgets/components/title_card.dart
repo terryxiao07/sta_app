@@ -11,25 +11,28 @@ class TitleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(
-        horizontal: Styles.mainHorizontalPadding,
-        vertical: Styles.mainVerticalPadding,
-      ),
-      shape: const RoundedRectangleBorder(
-        borderRadius: Styles.mainBorderRadius,
-      ),
-      color: Styles.primary, // Background color set to primary
-      child: Padding(
-        padding: const EdgeInsets.all(Styles.mainInsidePadding),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontFamily: Styles.fontFamilyTitles,
-            fontSize: Styles.fontSizeExtraLarge,
-            color: Styles.white, // Text color set to white
-            fontWeight: FontWeight.bold,
+    return SizedBox(
+      width: double.infinity, // Takes up all available horizontal space
+      child: Card(
+        elevation: 4,
+        margin: const EdgeInsets.symmetric(
+          horizontal: Styles.mainHorizontalPadding,
+          vertical: Styles.mainVerticalPadding,
+        ), // Same margin as DisplayCard
+        shape: const RoundedRectangleBorder(
+          borderRadius: Styles.mainBorderRadius,
+        ),
+        color: Styles.primary, // Background color set to primary
+        child: Padding(
+          padding: const EdgeInsets.all(Styles.mainInsidePadding), // Same padding as DisplayCard
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontFamily: Styles.fontFamilyTitles,
+              fontSize: Styles.fontSizeExtraLarge,
+              color: Styles.white, // Text color set to white
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

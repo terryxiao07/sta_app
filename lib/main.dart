@@ -1,4 +1,6 @@
 import 'package:app/widgets/components/title_card.dart';
+import 'package:app/widgets/home/announcements.dart';
+import 'package:app/widgets/home/chaplaincy_corner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:app/theme/styles.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Nested Components',
+            'Top Menu Bar?',
             style: TextStyle(
               fontFamily: Styles.fontFamilyTitles,
               color: Styles.white,
@@ -48,21 +50,23 @@ class MyApp extends StatelessWidget {
             child: Column(
               children: [
                 const TitleCard(title: "Nima"),
+                const Announcements(),
+                const ChaplaincyCorner(),
                 const DisplayCard(
                   title: "Info Inside Card",
                   description:
                       "This card contains an InfoBox component as its content.",
                   child: InfoBox(
-                    name: "Jane Doe",
+                    name: "Infobox",
                     message:
-                        "This InfoBox is nested inside a DisplayCard for demonstration purposes.",
+                        "This an infobox in case you were wondering",
                   ),
                 ),
                 const SizedBox(height: Styles.mainSpacing),
                 DisplayCard(
-                  title: "Welcome to the App!",
+                  title: "Test Card - Welcome to the App!",
                   description:
-                      "This card demonstrates the use of a reusable card component with a styled button.",
+                      "this is a reusable card with a button",
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Styles.secondary,

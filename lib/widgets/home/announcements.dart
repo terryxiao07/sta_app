@@ -1,54 +1,33 @@
+import 'package:app/widgets/components/display_card.dart';
+import 'package:app/widgets/components/info_box.dart';
 import 'package:flutter/material.dart';
-import 'package:app/theme/styles.dart';
 
-/// {@template basic_container}
-/// Reusable widget for displaying a container with a border radius and shadow.
-/// {@endtemplate}
-class BasicContainer extends StatelessWidget {
-  /// The child widget to display inside the container.
-  final Widget child;
-
-  /// Decoration for the container.
-  final Decoration? decoration;
-
-  /// Padding for the container.
-  final EdgeInsetsGeometry? padding;
-
-  /// Function to call when the user presses on the container.
-  final Function()? onPressed;
-
-  /// {@macro basic_container}
-  const BasicContainer(
-      {super.key,
-      required this.child,
-      this.decoration,
-      this.padding,
-      this.onPressed});
+class Announcements extends StatelessWidget {
+  const Announcements({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Decoration decoration = this.decoration ??
-        BoxDecoration(
-            color: Styles.white,
-            borderRadius: Styles.mainBorderRadius,
-            boxShadow: Styles.normalBoxShadow);
-
-    EdgeInsetsGeometry padding =
-        this.padding ?? const EdgeInsets.all(Styles.mainInsidePadding);
-
-    Container container = Container(
-        decoration: decoration,
-        padding: padding,
-        width: MediaQuery.of(context).size.width,
-        child: child);
-
-    if (onPressed != null) {
-      return GestureDetector(
-        onTap: onPressed,
-        child: container,
-      );
-    } else {
-      return container;
-    }
+    return const DisplayCard(
+      title: "Announcementsssss",
+      description: "Subheading area, that can be empty",
+      child: Column(
+        children: [
+          InfoBox(
+            name: "Announcement 1",
+            message: "This is the subheading for annoucement 1. I am adding text for no reason.",
+          ),
+          SizedBox(height: 16), // Spacing between InfoBoxes
+          InfoBox(
+            name: "Announcement 2",
+            message: "This is the subheading for annoucement 2. I am adding text for no reason.",
+          ),
+          SizedBox(height: 16),
+          InfoBox(
+            name: "Announcement 3",
+            message: "This is the subheading for annoucement 3. I am adding text for no reason.",
+          ),
+        ],
+      ),
+    );
   }
 }

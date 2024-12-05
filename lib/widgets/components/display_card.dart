@@ -3,7 +3,7 @@ import 'package:app/theme/styles.dart'; // Import the Styles file.
 
 class DisplayCard extends StatelessWidget {
   final String title;
-  final String? description; // Made description optional
+  final String? description; // Description optional
   final Widget? child;
 
   const DisplayCard({
@@ -15,48 +15,51 @@ class DisplayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(
-        horizontal: Styles.mainHorizontalPadding,
-        vertical: Styles.mainVerticalPadding,
-      ),
-      shape: const RoundedRectangleBorder(
-        borderRadius: Styles.mainBorderRadius,
-      ),
-      color: Styles.white, // Set background color to white
-      shadowColor: Styles.primary.withOpacity(0.3),
-      child: Padding(
-        padding: const EdgeInsets.all(Styles.mainInsidePadding),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontFamily: Styles.fontFamilyTitles,
-                fontSize: Styles.fontSizeExtraLarge,
-                color: Styles.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            if (description != null) ...[ // Conditionally render the description
-              const SizedBox(height: Styles.mainSpacing / 2),
+    return SizedBox(
+      width: double.infinity, // Takes up the maximum available width
+      child: Card(
+        elevation: 4,
+        margin: const EdgeInsets.symmetric(
+          horizontal: Styles.mainHorizontalPadding,
+          vertical: Styles.mainVerticalPadding,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: Styles.mainBorderRadius,
+        ),
+        color: Styles.white, // Set background color to white
+        shadowColor: Styles.primary.withOpacity(0.3),
+        child: Padding(
+          padding: const EdgeInsets.all(Styles.mainInsidePadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                description!,
+                title,
                 style: const TextStyle(
-                  fontFamily: Styles.fontFamilyNormal,
-                  fontSize: Styles.fontSizeMedium,
-                  color: Styles.primary, // Set description color to primary
+                  fontFamily: Styles.fontFamilyTitles,
+                  fontSize: Styles.fontSizeExtraLarge,
+                  color: Styles.primary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+              if (description != null) ...[ // Conditionally render the description
+                const SizedBox(height: Styles.mainSpacing / 4),
+                Text(
+                  description!,
+                  style: const TextStyle(
+                    fontFamily: Styles.fontFamilyNormal,
+                    fontSize: Styles.fontSizeMedium,
+                    color: Styles.primary, // Set description color to primary
+                  ),
+                ),
+              ],
+              if (child != null) ...[
+                const SizedBox(height: Styles.mainSpacing),
+                child!,
+              ],
             ],
-            if (child != null) ...[
-              const SizedBox(height: Styles.mainSpacing),
-              child!,
-            ],
-          ],
+          ),
         ),
       ),
     );
