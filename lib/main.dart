@@ -1,11 +1,7 @@
-import 'package:app/widgets/components/title_card.dart';
-import 'package:app/widgets/home/announcements.dart';
-import 'package:app/widgets/home/chaplaincy_corner.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:app/theme/styles.dart';
-import 'package:app/widgets/components/display_card.dart'; // Adjust the path based on your file structure.
-import 'package:app/widgets/components/info_box.dart'; // Adjust the path based on your file structure.
+import 'package:app/theme/styles.dart'; // Import the Styles file.
+import 'package:app/screens/home_screen.dart';
+import 'package:app/screens/menu_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,67 +28,53 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Top Menu Bar?',
-            style: TextStyle(
-              fontFamily: Styles.fontFamilyTitles,
-              color: Styles.white,
-            ),
+      home: const MainNavigation(),
+    );
+  }
+}
+
+class MainNavigation extends StatefulWidget {
+  const MainNavigation({super.key});
+
+  @override
+  State<MainNavigation> createState() => _MainNavigationState();
+}
+
+class _MainNavigationState extends State<MainNavigation> {
+  int _selectedIndex = 0; // Tracks the currently selected tab
+
+  // Screens for navigation
+  static const List<Widget> _screens = [
+    HomeScreen(),
+    MenuScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex], // Display the selected screen
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex, // Highlight the selected tab
+        onTap: _onItemTapped, // Handle tap on navigation items
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          backgroundColor: Styles.primary,
-          toolbarHeight: Styles.appBarHeight,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(Styles.mainHorizontalPadding),
-            child: Column(
-              children: [
-                const TitleCard(title: "Nima"),
-                const Announcements(),
-                const ChaplaincyCorner(),
-                const DisplayCard(
-                  title: "Info Inside Card",
-                  description:
-                      "This card contains an InfoBox component as its content.",
-                  child: InfoBox(
-                    name: "Infobox",
-                    message:
-                        "This an infobox in case you were wondering",
-                  ),
-                ),
-                const SizedBox(height: Styles.mainSpacing),
-                DisplayCard(
-                  title: "Test Card - Welcome to the App!",
-                  description:
-                      "this is a reusable card with a button",
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Styles.secondary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: Styles.primaryBorderRadius,
-                      ),
-                    ),
-                    onPressed: () {
-                      if (kDebugMode) {
-                        print("DisplayCard Button Pressed!");
-                      }
-                    },
-                    child: const Text(
-                      "Click Me",
-                      style: TextStyle(
-                        fontFamily: Styles.fontFamilyNormal,
-                        fontSize: Styles.fontSizeLarge,
-                        color: Styles.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Menu',
           ),
-        ),
+        ],
+        selectedItemColor: Styles.primary, // Active icon color
+        unselectedItemColor: Styles.grey, // Inactive icon color
+        backgroundColor: Styles.white, // Background color of the nav bar
       ),
     );
   }
