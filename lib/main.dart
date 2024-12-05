@@ -1,5 +1,9 @@
+import 'package:app/widgets/components/title_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:app/widgets/components/display_card.dart'; // Import the DisplayCard widget
+import 'package:app/theme/styles.dart';
+import 'package:app/widgets/components/display_card.dart'; // Adjust the path based on your file structure.
+import 'package:app/widgets/components/info_box.dart'; // Adjust the path based on your file structure.
 
 void main() {
   runApp(const MyApp());
@@ -11,36 +15,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Display Announcements',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontFamily: Styles.fontFamilyTitles,
+            fontSize: Styles.fontSizeExtraLarge,
+            fontWeight: FontWeight.bold,
+            color: Styles.primary,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: Styles.fontFamilyNormal,
+            fontSize: Styles.fontSizeMedium,
+            color: Styles.grey,
+          ),
+        ),
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Display Announcements'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // DisplayCard with three InfoBox announcements
-              DisplayCard(
-                title: "hi"
-              ),
-            ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Nested Components',
+            style: TextStyle(
+              fontFamily: Styles.fontFamilyTitles,
+              color: Styles.white,
+            ),
+          ),
+          backgroundColor: Styles.primary,
+          toolbarHeight: Styles.appBarHeight,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(Styles.mainHorizontalPadding),
+            child: Column(
+              children: [
+                const TitleCard(title: "Nima"),
+                const DisplayCard(
+                  title: "Info Inside Card",
+                  description:
+                      "This card contains an InfoBox component as its content.",
+                  child: InfoBox(
+                    name: "Jane Doe",
+                    message:
+                        "This InfoBox is nested inside a DisplayCard for demonstration purposes.",
+                  ),
+                ),
+                const SizedBox(height: Styles.mainSpacing),
+                DisplayCard(
+                  title: "Welcome to the App!",
+                  description:
+                      "This card demonstrates the use of a reusable card component with a styled button.",
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Styles.secondary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: Styles.primaryBorderRadius,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("DisplayCard Button Pressed!");
+                      }
+                    },
+                    child: const Text(
+                      "Click Me",
+                      style: TextStyle(
+                        fontFamily: Styles.fontFamilyNormal,
+                        fontSize: Styles.fontSizeLarge,
+                        color: Styles.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

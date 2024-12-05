@@ -5,31 +5,46 @@ class InfoBox extends StatelessWidget {
   final String name;
   final String message;
 
-  const InfoBox({super.key, required this.name, required this.message});
+  const InfoBox({
+    super.key,
+    required this.name,
+    required this.message,
+  });
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(children: [
-      Container(
-        margin: const EdgeInsets.only(top: 10.0),
-        width: 350.0,
-        height: null,
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF8D1230), width: 1),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Card(
-          color: Colors.white,
-          child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name, style: theme.textTheme.displayLarge?.copyWith(color: Styles.primary)),
-                  Text(message,style: theme.textTheme.bodyLarge?.copyWith(color: Styles.primary)), ])),
-        )
-      )
-    ]);
+    return Container(
+      margin: const EdgeInsets.only(top: Styles.mainSpacing / 2),
+      padding: const EdgeInsets.all(Styles.mainInsidePadding),
+      width: 350.0,
+      decoration: BoxDecoration(
+        color: Styles.white, // White background
+        border: Border.all(color: Styles.primary, width: 1), // Red outline
+        borderRadius: Styles.primaryBorderRadius, // Rounded corners
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontFamily: Styles.fontFamilyTitles,
+              fontSize: Styles.fontSizeMedium,
+              fontWeight: FontWeight.bold,
+              color: Styles.primary,
+            ),
+          ),
+          const SizedBox(height: Styles.mainSpacing / 2),
+          Text(
+            message,
+            style: const TextStyle(
+              fontFamily: Styles.fontFamilyNormal,
+              fontSize: Styles.fontSizeMedium,
+              color: Styles.primary,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

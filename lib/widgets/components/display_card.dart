@@ -1,47 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:app/theme/styles.dart';
+import 'package:app/theme/styles.dart'; // Import the Styles file.
 
 class DisplayCard extends StatelessWidget {
-  final String title; // Title of Card
+  final String title;
+  final String? description; // Made description optional
+  final Widget? child;
 
   const DisplayCard({
-    super.key, // Accept list of info box data
-    required this.title
+    super.key,
+    required this.title,
+    this.description, // Updated to accept null values
+    this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          width: 350.0,
-          height: null,
-          decoration: BoxDecoration(
-            boxShadow: Styles.normalBoxShadow,
-            borderRadius: Styles.primaryBorderRadius,
-          ),
-          child: Card(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    style: theme.textTheme.displayLarge?.copyWith(color: Styles.primary),
-                  ),
-                ],
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(
+        horizontal: Styles.mainHorizontalPadding,
+        vertical: Styles.mainVerticalPadding,
+      ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: Styles.mainBorderRadius,
+      ),
+      color: Styles.white, // Set background color to white
+      shadowColor: Styles.primary.withOpacity(0.3),
+      child: Padding(
+        padding: const EdgeInsets.all(Styles.mainInsidePadding),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontFamily: Styles.fontFamilyTitles,
+                fontSize: Styles.fontSizeExtraLarge,
+                color: Styles.primary,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
+            if (description != null) ...[ // Conditionally render the description
+              const SizedBox(height: Styles.mainSpacing / 2),
+              Text(
+                description!,
+                style: const TextStyle(
+                  fontFamily: Styles.fontFamilyNormal,
+                  fontSize: Styles.fontSizeMedium,
+                  color: Styles.primary, // Set description color to primary
+                ),
+              ),
+            ],
+            if (child != null) ...[
+              const SizedBox(height: Styles.mainSpacing),
+              child!,
+            ],
+          ],
         ),
-      ],
+      ),
     );
   }
 }

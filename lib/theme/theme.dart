@@ -3,7 +3,7 @@ import 'package:app/theme/styles.dart';
 
 ThemeData appThemeData = ThemeData(
   useMaterial3: true, // Enables Material 3 design
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     color: Styles.primary,
     elevation: 0.0,
     iconTheme: IconThemeData(color: Styles.secondary),
@@ -26,14 +26,14 @@ ThemeData appThemeData = ThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Styles.white,
       backgroundColor: Styles.secondary,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: Styles.mainBorderRadius,
         side: BorderSide(color: Styles.secondary),
       ),
     ),
   ),
-  inputDecorationTheme: InputDecorationTheme(
-    contentPadding: const EdgeInsets.symmetric(
+  inputDecorationTheme: const InputDecorationTheme(
+    contentPadding: EdgeInsets.symmetric(
       horizontal: Styles.mainHorizontalPadding,
       vertical: Styles.mainVerticalPadding,
     ),
@@ -68,7 +68,7 @@ ThemeData appThemeData = ThemeData(
     style: TextButton.styleFrom(
       foregroundColor: Styles.secondary,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontFamily: Styles.fontFamilyNormal,
       ),
     ),
@@ -78,7 +78,7 @@ ThemeData appThemeData = ThemeData(
     selectionHandleColor: Styles.secondary,
     selectionColor: Styles.secondary.withOpacity(0.5),
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     displayLarge: TextStyle(
         fontFamily: Styles.fontFamilyNormal,
         fontSize: 96.0,
