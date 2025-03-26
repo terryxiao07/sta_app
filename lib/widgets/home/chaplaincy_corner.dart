@@ -15,11 +15,6 @@ class ChaplaincyCorner extends StatelessWidget {
             name: "Verse of The Day",
             message: "So we fix our eyes not on what is seen, but on what is unseen, since what is seen is temporary, but what is unseen is eternal.",
           ),
-          SizedBox(height: 16), // Spacing between InfoBoxes
-          InfoBox(
-            name: "Additional",
-            message: "Subheading",
-          ),
         ],
       ),
     );
