@@ -1,43 +1,79 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:app/widgets/components/display_card.dart';
-import 'package:app/widgets/components/menu_item.dart'; // Import MenuItem
+import 'package:app/widgets/components/menu_item.dart';
 
-class FeaturedCafeItems extends StatelessWidget {
+class FeaturedCafeItems extends StatefulWidget {
   const FeaturedCafeItems({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
+  _FeaturedCafeItemsState createState() => _FeaturedCafeItemsState();
+}
+
+class _FeaturedCafeItemsState extends State<FeaturedCafeItems> {
+  static const List<MenuItem> menuItems = [
+    MenuItem(itemName: 'Cappuccino', price: 4.99),
+    MenuItem(itemName: 'Muffin', price: 3.49),
+    MenuItem(itemName: 'Latte', price: 5.49),
+    MenuItem(itemName: 'Espresso', price: 2.99),
+    MenuItem(itemName: 'Croissant', price: 3.99),
+    MenuItem(itemName: 'Iced Coffee', price: 4.49),
+    MenuItem(itemName: 'Bagel', price: 2.79),
+    MenuItem(itemName: 'Mocha', price: 5.29),
+  ];
+
+  int startIndex = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        startIndex = (startIndex + itemsPerPage) % menuItems.length;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  int get itemsPerPage => MediaQuery.of(context).size.width > 740 ? 4 : 2;
+
+  @override
   Widget build(BuildContext context) {
-    // List of featured menu items
-    const List<MenuItem> menuItems = [
-      MenuItem(itemName: 'Cappuccino', price: 4.99),
-      MenuItem(itemName: 'Muffin', price: 3.49),
-      MenuItem(itemName: 'Latte', price: 5.49),
-      MenuItem(itemName: 'Espresso', price: 2.99),
-      MenuItem(itemName: 'Croissant', price: 3.99),
-      MenuItem(itemName: 'Iced Coffee', price: 4.49),
-      MenuItem(itemName: 'Bagel', price: 2.79),
-      MenuItem(itemName: 'Mocha', price: 5.29),
-    ];
+    final int itemsToShow = itemsPerPage;
+    final List<MenuItem> displayedItems = menuItems.sublist(
+      startIndex, 
+      (startIndex + itemsToShow) <= menuItems.length
+          ? startIndex + itemsToShow
+          : menuItems.length,
+    );
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isWideScreen = constraints.maxWidth > 740; // TV screen detection
-
         return DisplayCard(
           title: "Featured Café Items",
           child: SizedBox(
-            height: isWideScreen ? 140 : 500, // Adjust height based on layout
+            height: constraints.maxWidth > 740 ? 280 : 600,
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isWideScreen ? 4 : 2, // 4x1 for TV, 2x4 for normal
-                childAspectRatio: 1, // Ensures square items
-                crossAxisSpacing: 12, // Spacing between items
-                mainAxisSpacing: 12, // Spacing between rows
+                crossAxisCount: itemsToShow, // 2 or 4 depending on screen size
+                childAspectRatio: 1, // Adjust ratio to prevent overflow
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
               ),
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(), // Prevents grid from being scrollable
-              itemCount: menuItems.length,
-              itemBuilder: (context, index) => menuItems[index],
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: displayedItems.length,
+              itemBuilder: (context, index) => SizedBox( 
+                height: 120, // Ensure each item has a fixed height
+                child: displayedItems[index],
+              ),
             ),
           ),
         );
